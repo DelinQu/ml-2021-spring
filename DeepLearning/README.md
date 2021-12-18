@@ -11,8 +11,8 @@
   - Adaptive Learning Rate: optimizer: [ppt](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/optimizer_v4.pptx) [pdf](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/optimizer_v4.pdf)
   - Loss of Classification: classification: [ppt](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/classification_v2.pptx) [pdf](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/classification_v2.pdf)
 - HW2: Classification
----
 
+---
 ## General Guidance
 - Framework of ML
 - Model Bias 
@@ -21,3 +21,11 @@
 - Cross Validation
 - N-fold Cross Validation
 - Mismatch
+
+---
+## Critical Point: small gradient
+- critical points
+- Tayler Series Approximation
+- Hessian
+- Saddle Point v.s. Local Minima
+- Empirical Study
