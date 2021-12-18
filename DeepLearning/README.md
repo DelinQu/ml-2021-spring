@@ -33,4 +33,5 @@
 ---
 ## Tips for training: Batch and Momentum
 - Small Batch v.s. Large Batch
+- (Vanilla) Gradient Descent
 - Gradient Descent + Momentum
