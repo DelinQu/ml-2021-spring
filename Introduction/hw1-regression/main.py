@@ -9,14 +9,16 @@ from testing import test, save_pred
 
 # TODO: How to tune these hyper-parameters to improve your model's performance?
 config = {
-    'n_epochs': 3000,                   # maximum number of epochs
-    'batch_size': 270,                  # mini-batch size for dataloader
-    'optimizer': 'SGD',                 # optimization algorithm (optimizer in torch.optim)
+    'n_epochs': 10000,                  # maximum number of epochs
+    'batch_size': 200,                  # mini-batch size for dataloader
+    'optimizer': 'Adam',                # optimization algorithm (optimizer in torch.optim)
     'optim_hparas': {                   # hyper-parameters for the optimizer (depends on which optimizer you are using)
-        'lr': 0.001,                    # learning rate of SGD
-        'momentum': 0.9                 # momentum for SGD
+        # 'lr': 0.001,                    # learning rate of SGD
+        # 'momentum': 0.9                 # momentum for SGD
+        # 'weight_decay': 5e-4,
     },
-    'early_stop': 200,                  # early stopping epochs (the number epochs since your model's last improvement)
+    'lambda': 0.00075,                  # regularization rate
+    'early_stop': 500,                  # early stopping epochs (the number epochs since your model's last improvement)
     'save_path': 'models/model.pth',    # your model will be saved here
     'tr_path': 'covid.train.csv',       # path to training data
     'tt_path': 'covid.test.csv',        # path to testing data
@@ -25,6 +27,7 @@ config = {
 
 device = get_device()
 os.makedirs('models',exist_ok=True)
+target_only = True
 
 if __name__ == '__main__':
     # get dataloader
@@ -33,7 +36,7 @@ if __name__ == '__main__':
     tt_set = COVID19Dataloader(config['tt_path'], 'test', config['batch_size'], target_only = config['target_only'])
 
     # construct model and move to device
-    model = NeuralNet(tr_set.dataset.dim).to(device)
+    model = NeuralNet(tr_set.dataset.dim, config['lambda']).to(device)
 
     # training and plot training loss curve
     model_loss, model_loss_record = train(tr_set, dv_set, model, config, device)
@@ -41,7 +44,7 @@ if __name__ == '__main__':
 
     # load model and plot prediction curve on dev
     del model
-    model = NeuralNet(tr_set.dataset.dim).to(device)
+    model = NeuralNet(tr_set.dataset.dim, config['lambda']).to(device)
     ckpt = torch.load(config['save_path'], map_location='cpu')  # Load your best model
     model.load_state_dict(ckpt)
     preds, targets =  pred_dev(dv_set, model, device)           # predct on dev_set

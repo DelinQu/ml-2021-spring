@@ -55,7 +55,7 @@ def calc_dev_loss(dv_set, model:NeuralNet, device):
         x, y = x.to(device), y.to(device)           # move data to device (cpu/cuda)
         with torch.no_grad():                       # disable gradient calculation
             pre = model(x)                          # forward pass (compute output)
-            loss = model.cal_loss(pre,y)            # compute loss
+            loss = model.cal_loss(pre, y)           # compute loss
         total_loss += loss.detach().cpu().item() * len(x)
     total_loss /= len(dv_set.dataset)               # compute averaged loss
 

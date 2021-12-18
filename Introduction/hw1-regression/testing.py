@@ -1,5 +1,4 @@
-import csv
-
+import pandas as pd
 import torch
 from model import NeuralNet
 
@@ -17,14 +16,13 @@ def test(tt_set, model:NeuralNet, device):
     preds = torch.cat(preds, dim=0).numpy()     # concatenate all predictions and convert to a numpy array
     return preds
 
-'''
-save preditions of tt_set. 
+''' 
+Save predictions to specified file 
 '''
 def save_pred(preds, file):
-    ''' Save predictions to specified file '''
     print('Saving results to {}'.format(file))
-    with open(file, 'w') as fp:
-        writer = csv.writer(fp)
-        writer.writerow(['id', 'tested_positive'])
-        for i, p in enumerate(preds):
-            writer.writerow([i, p])
+    df = pd.DataFrame({
+        'id': list(range(preds.shape[0])),
+        'tested_positive': preds.tolist()
+    })
+    df.to_csv(file, index=False)

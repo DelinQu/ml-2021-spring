@@ -1,16 +1,13 @@
-import csv
-import numpy as np
 import torch
+import pandas as pd
 from torch.utils.data import Dataset, DataLoader
+
 
 class COVID19Dataset(Dataset):
     def __init__(self, path, mode='train', target_only=False):
         self.mode = mode
-
         # read data from file
-        with open(path,'r') as fp:
-            data = list(csv.reader(fp))
-            data = np.array(data[1:])[:, 1:].astype(float)
+        data = pd.read_csv(path, header=None).values[1:,1:].astype(float)
 
         # Set feature by target_only
         if not target_only:
@@ -18,6 +15,7 @@ class COVID19Dataset(Dataset):
         else:
             # TODO: Using 40 states & 2 tested_positive features (indices = 57 & 75)
             feats = list(range(40)) + [57,75]
+            feats = [75, 57, 42, 60, 78, 43, 61, 79, 40, 58, 76, 41, 59, 77]  # 上面挑选的最优特征
 
         # Set the dataset
         if mode == 'test':
