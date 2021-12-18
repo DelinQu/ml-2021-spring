@@ -29,3 +29,8 @@
 - Hessian
 - Saddle Point v.s. Local Minima
 - Empirical Study
+
+---
+## Tips for training: Batch and Momentum
+- Small Batch v.s. Large Batch
+- Gradient Descent + Momentum
