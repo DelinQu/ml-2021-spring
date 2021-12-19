@@ -4,7 +4,7 @@ import torch
 from COVID19Dataset import COVID19Dataloader
 from model import NeuralNet
 from training import train, pred_dev
-from utils import get_device, plot_learning_curve, plot_dev_pred
+from utils import get_device, plot_learning_curve, plot_dev_pred, same_seeds
 from testing import test, save_pred
 
 # TODO: How to tune these hyper-parameters to improve your model's performance?
@@ -25,6 +25,7 @@ config = {
     'target_only': False
 }
 
+same_seeds(0)
 device = get_device()
 os.makedirs('models',exist_ok=True)
 target_only = True
