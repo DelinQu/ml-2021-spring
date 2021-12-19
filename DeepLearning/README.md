@@ -45,3 +45,10 @@
 - Adam: RMSProp + Momentum
 - Learning Rate Scheduling
 - Summary of Optimization
+
+---
+## Classification
+- Class as one-hot vector
+- Soft-max
+- Cross-entropy
+- Soft-max is binded with Cross-entropy in Pytorch
