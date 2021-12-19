@@ -35,3 +35,13 @@
 - Small Batch v.s. Large Batch
 - (Vanilla) Gradient Descent
 - Gradient Descent + Momentum
+
+---
+## Adaptive Learning Rate: optimizer
+- Training stuck ≠ Small Gradient
+- Training can be difficult even without critical points
+- Root Mean Square
+- RMSProp
+- Adam: RMSProp + Momentum
+- Learning Rate Scheduling
+- Summary of Optimization
