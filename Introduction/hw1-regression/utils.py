@@ -1,6 +1,7 @@
 import torch.cuda
 from matplotlib.pyplot import figure
 import matplotlib.pyplot as plt
+import numpy as np
 
 ''' 
 get the device 

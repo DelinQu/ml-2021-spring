@@ -36,15 +36,16 @@ if __name__ == '__main__':
     dv_set = COVID19Dataloader(config['tr_path'], 'dev',   config['batch_size'], target_only = config['target_only'])
     tt_set = COVID19Dataloader(config['tt_path'], 'test', config['batch_size'], target_only = config['target_only'])
 
-    # construct model and move to device
-    model = NeuralNet(tr_set.dataset.dim, config['lambda']).to(device)
+    # # construct model and move to device
+    # model = NeuralNet(tr_set.dataset.dim, config['lambda']).to(device)
+    #
+    # # training and plot training loss curve
+    # model_loss, model_loss_record = train(tr_set, dv_set, model, config, device)
+    # plot_learning_curve(model_loss_record, title='deep model')
+    #
+    # # load model and plot prediction curve on dev
+    # del model
 
-    # training and plot training loss curve
-    model_loss, model_loss_record = train(tr_set, dv_set, model, config, device)
-    plot_learning_curve(model_loss_record, title='deep model')
-
-    # load model and plot prediction curve on dev
-    del model
     model = NeuralNet(tr_set.dataset.dim, config['lambda']).to(device)
     ckpt = torch.load(config['save_path'], map_location='cpu')  # Load your best model
     model.load_state_dict(ckpt)
